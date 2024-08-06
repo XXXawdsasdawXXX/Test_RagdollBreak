@@ -30,26 +30,28 @@ namespace Code.UI.UILine
 
             if (points.Count < 2) return;
 
-        
-            float angle = 0;
-            for (int i = 0; i < points.Count - 1; i++) {
-
+            for (int i = 0; i < points.Count - 1; i++) 
+            {
                 Vector2 point = points[i];
-                Vector2 point2 = points[i+1];
+                Vector2 point2 = points[i + 1];
 
-                if (i < points.Count - 1) {
-                    angle = GetAngle(points[i], points[i + 1]) + 90f;
+                if (IsValidPoint(point) && IsValidPoint(point2))
+                {
+                    DrawVerticesForPoint(point, point2, vh);
                 }
-
-                DrawVerticesForPoint(point, point2, angle, vh);
             }
 
-            for (int i = 0; i < points.Count - 1; i++) {
+            int vertexCount = vh.currentVertCount;
+
+            for (int i = 0; i < points.Count - 1; i++) 
+            {
                 int index = i * 4;
-                vh.AddTriangle(index + 0, index + 1, index + 2);
-                vh.AddTriangle(index + 1, index + 2, index + 3);
+                if (index + 3 < vertexCount)
+                {
+                    vh.AddTriangle(index + 0, index + 1, index + 2);
+                    vh.AddTriangle(index + 1, index + 2, index + 3);
+                }
             }
-        
         }
 
         public void SetGridRenderer(UIGridRenderer grid)
@@ -57,13 +59,12 @@ namespace Code.UI.UILine
             _grid = grid;
         }
 
-        public void SetPosition(int index,Vector2 p)
+        public void SetPosition(int index, Vector2 p)
         {
             Vector2 newPoint = new Vector2(p.x / unitWidth, p.y / unitHeight);
             points[index] = newPoint;
             SetVerticesDirty();
         }
-
 
         public void AddPosition(Vector2 p)
         {
@@ -91,29 +92,51 @@ namespace Code.UI.UILine
             color = fruitDataColor;
         }
         
-        private float GetAngle(Vector2 me, Vector2 target) {
-            return (float)(Mathf.Atan2(9f*(target.y - me.y), 16f*(target.x - me.x)) * Mathf.Rad2Deg);
+        private float GetAngle(Vector2 me, Vector2 target) 
+        {
+            return Mathf.Atan2(target.y - me.y, target.x - me.x) * Mathf.Rad2Deg;
         }
+
+        private void DrawVerticesForPoint(Vector2 point, Vector2 point2, VertexHelper vh) 
+        {
+            if(IsVectorNegativeInfinity(point) || IsVectorNegativeInfinity(point2))
+            {
+                return;   
+            }
         
-        private void DrawVerticesForPoint(Vector2 point, Vector2 point2, float angle, VertexHelper vh) {
             UIVertex vertex = UIVertex.simpleVert;
             vertex.color = color;
 
-            vertex.position = Quaternion.Euler(0, 0, angle) * new Vector3(-thickness / 2, 0);
-            vertex.position += new Vector3(unitWidth * point.x, unitHeight * point.y);
+            Vector3 pos1 = new Vector3(unitWidth * point.x, unitHeight * point.y);
+            Vector3 pos2 = new Vector3(unitWidth * point2.x, unitHeight * point2.y);
+
+            Vector3 direction = (pos2 - pos1).normalized;
+            Vector3 perpendicular = new Vector3(-direction.y, direction.x) * (thickness / 2);
+
+            vertex.position = pos1 + perpendicular;
             vh.AddVert(vertex);
 
-            vertex.position = Quaternion.Euler(0, 0, angle) * new Vector3(thickness / 2, 0);
-            vertex.position += new Vector3(unitWidth * point.x, unitHeight * point.y);
+            vertex.position = pos1 - perpendicular;
             vh.AddVert(vertex);
 
-            vertex.position = Quaternion.Euler(0, 0, angle) * new Vector3(-thickness / 2, 0);
-            vertex.position += new Vector3(unitWidth * point2.x, unitHeight * point2.y);
+            vertex.position = pos2 + perpendicular;
             vh.AddVert(vertex);
 
-            vertex.position = Quaternion.Euler(0, 0, angle) * new Vector3(thickness / 2, 0);
-            vertex.position += new Vector3(unitWidth * point2.x, unitHeight * point2.y);
+            vertex.position = pos2 - perpendicular;
             vh.AddVert(vertex);
+        }
+
+        private bool IsValidPoint(Vector2 point)
+        {
+            return !float.IsNaN(point.x) && !float.IsNaN(point.y) &&
+                   !float.IsInfinity(point.x) && !float.IsInfinity(point.y);
+        }
+
+        private bool IsVectorNegativeInfinity(Vector3 vector)
+        {
+            return float.IsNegativeInfinity(vector.x) &&
+                   float.IsNegativeInfinity(vector.y) &&
+                   float.IsNegativeInfinity(vector.z);
         }
     }
 }

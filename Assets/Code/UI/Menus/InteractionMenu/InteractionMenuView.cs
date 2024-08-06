@@ -35,7 +35,7 @@ namespace Code.UI.Menus.InteractionMenu
         {
             _lineStartPoint.position = startPos;
             _hand.position = endPos;
-            _lineRenderer.SetPosition(0,       _lineStartPoint.anchoredPosition);
+            _lineRenderer.SetPosition(0,_lineStartPoint.anchoredPosition);
             _lineRenderer.SetPosition(1,_hand.anchoredPosition);
         }
 
