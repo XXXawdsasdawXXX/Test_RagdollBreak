@@ -16,11 +16,15 @@ namespace Code.Interaction
         private Camera _camera;
 
         public bool IsUsed { get; private set; }
+        public event Action OnStartUse; 
+        public event Action OnStopUse; 
+
 
         private void Awake()
         {
             _camera = Camera.main;
-            StopMove(Vector3.zero);
+            _rigidbody.isKinematic = false;
+            transform.position = _interactionObject.position;
         }
 
         private void OnEnable()
@@ -51,12 +55,32 @@ namespace Code.Interaction
 
         private void StartMove(Vector3 mousePosition)
         {
-            IsUsed = true;
-            _rigidbody.isKinematic = true;
+            // Преобразуем позицию мыши в мировые координаты
+            Ray ray = _camera.ScreenPointToRay(mousePosition);
+            RaycastHit hit;
+
+            // Проверяем, попадает ли луч в _interactionObject
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.transform == _interactionObject)
+                {
+                    IsUsed = true;
+                    _rigidbody.isKinematic = true;
+                    OnStartUse?.Invoke();
+                }
+                else
+                {
+                    Debug.Log("Raycast did not hit the interaction object.");
+                }
+            }
         }
 
         private void Move(Vector3 mousePosition)
         {
+            if (!IsUsed)
+            {
+                return;
+            }
             mousePosition.z = _camera.WorldToScreenPoint(transform.position).z;
             var target = _camera.ScreenToWorldPoint(mousePosition);
             transform.position = target;
@@ -64,9 +88,14 @@ namespace Code.Interaction
 
         private void StopMove(Vector3 mousePosition)
         {
+            if (!IsUsed)
+            {
+                return;
+            }
             IsUsed = false;
             _rigidbody.isKinematic = false;
             transform.position = _interactionObject.position;
+            OnStopUse?.Invoke();
         }
     }
 }
