@@ -8,7 +8,7 @@ namespace Code.UI.Menus.InteractionMenu
 {
     public class InteractionMenuView: BaseMenuView
     {
-        [SerializeField] private LineRendererHUD _lineRenderer;
+        [SerializeField] private UILineRenderer _lineRenderer;
         [SerializeField] private RectTransform _hand;
         [SerializeField] private RectTransform _lineStartPoint;
 
