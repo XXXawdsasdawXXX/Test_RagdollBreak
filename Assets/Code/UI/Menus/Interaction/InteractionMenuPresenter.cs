@@ -1,4 +1,5 @@
-﻿using Code.Interaction;
+﻿using System.Collections;
+using Code.Interaction;
 using Code.UI.Menus.Base;
 using UnityEngine;
 
@@ -41,6 +42,7 @@ namespace Code.UI.Menus.InteractionMenu
         private void OnEndTouch()
         {
             View.EnableElements(false);
+            View.CloseMenu();
         }
 
         private void Move()
@@ -52,11 +54,23 @@ namespace Code.UI.Menus.InteractionMenu
         private void OnStartTouch(InteractionJoint interactionJoint)
         {
             _interactionJoint = interactionJoint;
+            if (_coroutine != null)
+            {
+                StopCoroutine(_coroutine);
+            }
+
+            _coroutine = StartCoroutine(EnableRoutine());
+        }
+
+        private Coroutine _coroutine;
+        private IEnumerator EnableRoutine()
+        {
+            yield return new WaitForEndOfFrame();
             RefreshCoordinate();
             View.SetElementsPosition(startPos: Model.StartPoint, endPos: Model.EndPoint );
             View.EnableElements(true);
+            View.OpenMenu();
         }
-
         private void RefreshCoordinate()
         {
             Model.StartPoint = RectTransformUtility

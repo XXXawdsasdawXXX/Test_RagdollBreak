@@ -9,9 +9,10 @@ namespace Code.Interaction
     {
         [SerializeField] private SpringJoint _springJoint;
         [SerializeField] private InteractionPoint _interactionPoint;
-        [SerializeField, Range(50, 10000)] private float _defaultSpring = 100;
-        [SerializeField, Range(50, 10000)] private float _defaultDamper = 50;
+        [SerializeField, Range(0, 10000)] private float _defaultSpring = 100;
+        [SerializeField, Range(0, 10000)] private float _defaultDamper = 50;
         [SerializeField,Range(0,5)] private float _maxDistance = 2;
+        [SerializeField,Range(0,5)] private float _minDistance = 2;
 
         public event Action OnStartInteraction;
         public event Action OnStopInteraction;
@@ -21,6 +22,7 @@ namespace Code.Interaction
             SetEnable(false);
             _springJoint.autoConfigureConnectedAnchor = false;
             _springJoint.maxDistance = _maxDistance;
+            _springJoint.minDistance = _minDistance;
         }
         
         public void SetEnable(bool enable)

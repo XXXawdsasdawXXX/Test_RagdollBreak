@@ -532,8 +532,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 282309691}
-  m_LocalRotation: {x: -0, y: -0.046752896, z: -0, w: 0.9989065}
-  m_LocalPosition: {x: -0.8, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.31, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -541,7 +541,7 @@ Transform:
   - {fileID: 1276151125}
   m_Father: {fileID: 1811021858}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: -5.359, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &282309693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -568,7 +568,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 477a2fc097dc4f9ab63af34ad1b2bb40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _jointToCheck: {fileID: 2006022365}
+  _jointToCheck:
+  - {fileID: 2006022365}
+  - {fileID: 950067879}
 --- !u!114 &282309695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -709,6 +711,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d1714e5819a40499562b749aff592d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _inputService: {fileID: 1119513171}
   _leftEye: {fileID: 1132419752}
   _rightEye: {fileID: 1931867979}
   _distance: 40
@@ -760,14 +763,14 @@ CharacterJoint:
   m_ConnectedBody: {fileID: 1078426737}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0, z: 0}
-  m_Axis: {x: -1, y: -1, z: 0}
+  m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 2.83222, y: -0.00000047683716, z: -0.00000010430813}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
-    spring: 200
-    damper: 150
+    spring: 500
+    damper: 20
   m_LowTwistLimit:
     limit: -10
     bounciness: 0
@@ -790,7 +793,7 @@ CharacterJoint:
   m_EnableProjection: 0
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
-  m_BreakForce: Infinity
+  m_BreakForce: 11000
   m_BreakTorque: Infinity
   m_EnableCollision: 0
   m_EnablePreprocessing: 0
@@ -806,12 +809,12 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1.5
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 1
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!136 &312756676
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -891,9 +894,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _springJoint: {fileID: 312756680}
   _interactionPoint: {fileID: 562078899}
-  _defaultSpring: 100
-  _defaultDamper: 50
-  _maxDistance: 0.25
+  _defaultSpring: 35
+  _defaultDamper: 10
+  _maxDistance: 0.1
+  _minDistance: 0
 --- !u!145 &312756680
 SpringJoint:
   m_ObjectHideFlags: 0
@@ -903,12 +907,12 @@ SpringJoint:
   m_GameObject: {fileID: 312756672}
   m_ConnectedBody: {fileID: 562078897}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0.69, y: -0.01, z: 0}
-  m_AutoConfigureConnectedAnchor: 1
+  m_Anchor: {x: 2.21, y: 0.03, z: -0.05}
+  m_AutoConfigureConnectedAnchor: 0
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   serializedVersion: 2
-  m_Spring: 10
-  m_Damper: 0.2
+  m_Spring: 70
+  m_Damper: 10
   m_MinDistance: 0
   m_MaxDistance: 0
   m_Tolerance: 0.025
@@ -916,8 +920,8 @@ SpringJoint:
   m_BreakTorque: Infinity
   m_EnableCollision: 0
   m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
+  m_MassScale: 10
+  m_ConnectedMassScale: 50
 --- !u!21 &367716340
 Material:
   serializedVersion: 8
@@ -1088,7 +1092,7 @@ Transform:
   m_GameObject: {fileID: 369427647}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 100, z: 100}
-  m_LocalScale: {x: 20, y: 1, z: 20}
+  m_LocalScale: {x: 50, y: 1, z: 20}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1351546680}
@@ -1299,12 +1303,12 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 4
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 1
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!144 &460831950
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -1321,8 +1325,8 @@ CharacterJoint:
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: -1}
   m_TwistLimitSpring:
-    spring: 7000
-    damper: 3000
+    spring: 300
+    damper: 1
   m_LowTwistLimit:
     limit: 0
     bounciness: 0
@@ -1345,7 +1349,7 @@ CharacterJoint:
   m_EnableProjection: 0
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
-  m_BreakForce: 6000
+  m_BreakForce: 11000
   m_BreakTorque: Infinity
   m_EnableCollision: 0
   m_EnablePreprocessing: 0
@@ -1430,9 +1434,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _springJoint: {fileID: 460831955}
   _interactionPoint: {fileID: 562078899}
-  _defaultSpring: 100
-  _defaultDamper: 50
-  _maxDistance: 0.5
+  _defaultSpring: 70
+  _defaultDamper: 5
+  _maxDistance: 0.1
+  _minDistance: 0
 --- !u!145 &460831955
 SpringJoint:
   m_ObjectHideFlags: 0
@@ -1442,12 +1447,12 @@ SpringJoint:
   m_GameObject: {fileID: 460831947}
   m_ConnectedBody: {fileID: 562078897}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: -1.34, z: 0}
-  m_AutoConfigureConnectedAnchor: 1
+  m_Anchor: {x: 0, y: -1.34, z: -0.72}
+  m_AutoConfigureConnectedAnchor: 0
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   serializedVersion: 2
-  m_Spring: 10
-  m_Damper: 0.2
+  m_Spring: 70
+  m_Damper: 10
   m_MinDistance: 0
   m_MaxDistance: 0
   m_Tolerance: 0.025
@@ -1455,8 +1460,8 @@ SpringJoint:
   m_BreakTorque: Infinity
   m_EnableCollision: 0
   m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
+  m_MassScale: 10
+  m_ConnectedMassScale: 50
 --- !u!1 &562078895
 GameObject:
   m_ObjectHideFlags: 0
@@ -1467,8 +1472,8 @@ GameObject:
   m_Component:
   - component: {fileID: 562078898}
   - component: {fileID: 562078897}
-  - component: {fileID: 562078896}
   - component: {fileID: 562078899}
+  - component: {fileID: 562078900}
   m_Layer: 2
   m_Name: Intraction_Point
   m_TagString: Untagged
@@ -1476,19 +1481,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!135 &562078896
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 562078895}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &562078897
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1497,12 +1489,12 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 562078895}
   serializedVersion: 2
-  m_Mass: 15
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Mass: 1000
+  m_Drag: 1
+  m_AngularDrag: 1
   m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
+  m_IsKinematic: 0
+  m_Interpolate: 2
   m_Constraints: 8
   m_CollisionDetection: 0
 --- !u!4 &562078898
@@ -1535,6 +1527,19 @@ MonoBehaviour:
   _inputService: {fileID: 1119513171}
   _rigidbody: {fileID: 562078897}
   _interactionObject: {fileID: 784951915}
+--- !u!135 &562078900
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 562078895}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.01
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!21 &599689072
 Material:
   serializedVersion: 8
@@ -2397,9 +2402,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 784951911}
   serializedVersion: 2
-  m_Mass: 20
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Mass: 100
+  m_Drag: 0.2
+  m_AngularDrag: 5
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -2430,7 +2435,7 @@ SpringJoint:
   m_GameObject: {fileID: 784951911}
   m_ConnectedBody: {fileID: 562078897}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0, z: 0}
+  m_Anchor: {x: 0, y: 3.12, z: 0}
   m_AutoConfigureConnectedAnchor: 0
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   serializedVersion: 2
@@ -2443,8 +2448,8 @@ SpringJoint:
   m_BreakTorque: Infinity
   m_EnableCollision: 0
   m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
+  m_MassScale: 2
+  m_ConnectedMassScale: 100
 --- !u!114 &784951917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2460,8 +2465,9 @@ MonoBehaviour:
   _springJoint: {fileID: 784951916}
   _interactionPoint: {fileID: 562078899}
   _defaultSpring: 300
-  _defaultDamper: 150
-  _maxDistance: 2
+  _defaultDamper: 10
+  _maxDistance: 3
+  _minDistance: 0.2
 --- !u!21 &831599256
 Material:
   serializedVersion: 8
@@ -3119,12 +3125,12 @@ SpringJoint:
   m_GameObject: {fileID: 950067875}
   m_ConnectedBody: {fileID: 562078897}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 2.08, z: 0}
+  m_Anchor: {x: 0, y: 2.42, z: -0.08}
   m_AutoConfigureConnectedAnchor: 0
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   serializedVersion: 2
-  m_Spring: 0
-  m_Damper: 0
+  m_Spring: 70
+  m_Damper: 10
   m_MinDistance: 0
   m_MaxDistance: 0.5
   m_Tolerance: 0.025
@@ -3132,8 +3138,8 @@ SpringJoint:
   m_BreakTorque: Infinity
   m_EnableCollision: 0
   m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
+  m_MassScale: 10
+  m_ConnectedMassScale: 50
 --- !u!136 &950067878
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3158,14 +3164,14 @@ CharacterJoint:
   m_ConnectedBody: {fileID: 2006022364}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0, z: 0}
-  m_Axis: {x: -1, y: 0, z: 0}
+  m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 3.1387653, z: 0.0000002369702}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: -1}
   m_TwistLimitSpring:
-    spring: 7000
-    damper: 300
+    spring: 1000
+    damper: 200
   m_LowTwistLimit:
     limit: 0
     bounciness: 0
@@ -3188,7 +3194,7 @@ CharacterJoint:
   m_EnableProjection: 0
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
-  m_BreakForce: 7000
+  m_BreakForce: 20000
   m_BreakTorque: Infinity
   m_EnableCollision: 0
   m_EnablePreprocessing: 0
@@ -3275,9 +3281,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _springJoint: {fileID: 950067877}
   _interactionPoint: {fileID: 562078899}
-  _defaultSpring: 100
-  _defaultDamper: 100
-  _maxDistance: 2
+  _defaultSpring: 70
+  _defaultDamper: 10
+  _maxDistance: 0.2
+  _minDistance: 0
 --- !u!138 &950067884
 FixedJoint:
   m_ObjectHideFlags: 0
@@ -3287,12 +3294,12 @@ FixedJoint:
   m_GameObject: {fileID: 950067875}
   m_ConnectedBody: {fileID: 1889982626}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_BreakForce: 100
+  m_BreakForce: 500
   m_BreakTorque: Infinity
   m_EnableCollision: 0
   m_EnablePreprocessing: 1
   m_MassScale: 1
-  m_ConnectedMassScale: 1
+  m_ConnectedMassScale: 2
 --- !u!1 &961186506
 GameObject:
   m_ObjectHideFlags: 0
@@ -3420,7 +3427,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 85.9
+  field of view: 81.7
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -3446,7 +3453,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.11424355, y: 0, z: 0, w: 0.9934528}
-  m_LocalPosition: {x: 0, y: 14, z: -29.7}
+  m_LocalPosition: {x: 0, y: 14, z: -30}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3833,12 +3840,12 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 2.8125
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 1
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!144 &1078426738
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -3856,15 +3863,15 @@ CharacterJoint:
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
     spring: 150
-    damper: 75
+    damper: 2
   m_LowTwistLimit:
-    limit: -2
+    limit: 0
     bounciness: 0
     contactDistance: 2
   m_HighTwistLimit:
-    limit: 30
+    limit: 100
     bounciness: 0
-    contactDistance: 20
+    contactDistance: 50
   m_SwingLimitSpring:
     spring: 0
     damper: 0
@@ -3879,7 +3886,7 @@ CharacterJoint:
   m_EnableProjection: 0
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
-  m_BreakForce: Infinity
+  m_BreakForce: 11000
   m_BreakTorque: Infinity
   m_EnableCollision: 0
   m_EnablePreprocessing: 0
@@ -3964,9 +3971,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _springJoint: {fileID: 1078426743}
   _interactionPoint: {fileID: 562078899}
-  _defaultSpring: 100
-  _defaultDamper: 50
-  _maxDistance: 0.5
+  _defaultSpring: 70
+  _defaultDamper: 5
+  _maxDistance: 0.1
+  _minDistance: 0
 --- !u!145 &1078426743
 SpringJoint:
   m_ObjectHideFlags: 0
@@ -3976,12 +3984,12 @@ SpringJoint:
   m_GameObject: {fileID: 1078426735}
   m_ConnectedBody: {fileID: 562078897}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 1.35, y: -0.03, z: 0}
-  m_AutoConfigureConnectedAnchor: 1
+  m_Anchor: {x: 1.35, y: -0.03, z: -0.72}
+  m_AutoConfigureConnectedAnchor: 0
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   serializedVersion: 2
-  m_Spring: 10
-  m_Damper: 0.2
+  m_Spring: 70
+  m_Damper: 10
   m_MinDistance: 0
   m_MaxDistance: 0
   m_Tolerance: 0.025
@@ -3989,8 +3997,8 @@ SpringJoint:
   m_BreakTorque: Infinity
   m_EnableCollision: 0
   m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
+  m_MassScale: 10
+  m_ConnectedMassScale: 50
 --- !u!1 &1102234663
 GameObject:
   m_ObjectHideFlags: 0
@@ -4503,12 +4511,12 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 5
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 1
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!144 &1310582053
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -4519,22 +4527,22 @@ CharacterJoint:
   m_ConnectedBody: {fileID: 1516905447}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0, z: 0}
-  m_Axis: {x: 1, y: -1, z: 0}
+  m_Axis: {x: 1, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: -0.6786111, y: -0.8107877, z: -0.022009578}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 0}
   m_TwistLimitSpring:
-    spring: 3000
-    damper: 700
+    spring: 10
+    damper: 1
   m_LowTwistLimit:
-    limit: -3
+    limit: -100
     bounciness: 0
-    contactDistance: 1
+    contactDistance: 80
   m_HighTwistLimit:
-    limit: 5
+    limit: 100
     bounciness: 0
-    contactDistance: 3
+    contactDistance: 80
   m_SwingLimitSpring:
     spring: 0
     damper: 0
@@ -4549,12 +4557,12 @@ CharacterJoint:
   m_EnableProjection: 0
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
-  m_BreakForce: 7000
+  m_BreakForce: 13000
   m_BreakTorque: Infinity
   m_EnableCollision: 0
   m_EnablePreprocessing: 0
   m_MassScale: 1
-  m_ConnectedMassScale: 1
+  m_ConnectedMassScale: 2
 --- !u!136 &1310582054
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4634,9 +4642,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _springJoint: {fileID: 1310582058}
   _interactionPoint: {fileID: 562078899}
-  _defaultSpring: 100
-  _defaultDamper: 100
-  _maxDistance: 0.5
+  _defaultSpring: 70
+  _defaultDamper: 5
+  _maxDistance: 0.1
+  _minDistance: 0
 --- !u!145 &1310582058
 SpringJoint:
   m_ObjectHideFlags: 0
@@ -4646,12 +4655,12 @@ SpringJoint:
   m_GameObject: {fileID: 1310582050}
   m_ConnectedBody: {fileID: 562078897}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: -1.42, z: 0}
-  m_AutoConfigureConnectedAnchor: 1
+  m_Anchor: {x: 0, y: -1.42, z: -0.72}
+  m_AutoConfigureConnectedAnchor: 0
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   serializedVersion: 2
-  m_Spring: 10
-  m_Damper: 0.2
+  m_Spring: 70
+  m_Damper: 10
   m_MinDistance: 0
   m_MaxDistance: 0
   m_Tolerance: 0.025
@@ -4659,8 +4668,8 @@ SpringJoint:
   m_BreakTorque: Infinity
   m_EnableCollision: 0
   m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
+  m_MassScale: 10
+  m_ConnectedMassScale: 50
 --- !u!21 &1317028571
 Material:
   serializedVersion: 8
@@ -5333,9 +5342,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _springJoint: {fileID: 1516905453}
   _interactionPoint: {fileID: 562078899}
-  _defaultSpring: 100
-  _defaultDamper: 50
-  _maxDistance: 2
+  _defaultSpring: 70
+  _defaultDamper: 10
+  _maxDistance: 0.1
+  _minDistance: 0
 --- !u!145 &1516905453
 SpringJoint:
   m_ObjectHideFlags: 0
@@ -5346,11 +5356,11 @@ SpringJoint:
   m_ConnectedBody: {fileID: 562078897}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0.04, z: 0}
-  m_AutoConfigureConnectedAnchor: 1
+  m_AutoConfigureConnectedAnchor: 0
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   serializedVersion: 2
-  m_Spring: 10
-  m_Damper: 0.2
+  m_Spring: 70
+  m_Damper: 10
   m_MinDistance: 0
   m_MaxDistance: 0
   m_Tolerance: 0.025
@@ -5358,8 +5368,8 @@ SpringJoint:
   m_BreakTorque: Infinity
   m_EnableCollision: 0
   m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
+  m_MassScale: 10
+  m_ConnectedMassScale: 50
 --- !u!21 &1557589944
 Material:
   serializedVersion: 8
@@ -5565,12 +5575,12 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 2.8125
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 1
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!144 &1576717262
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -5588,15 +5598,15 @@ CharacterJoint:
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
     spring: 150
-    damper: 75
+    damper: 2
   m_LowTwistLimit:
-    limit: -2
+    limit: 0
     bounciness: 0
     contactDistance: 2
   m_HighTwistLimit:
-    limit: 30
+    limit: 100
     bounciness: 0
-    contactDistance: 20
+    contactDistance: 50
   m_SwingLimitSpring:
     spring: 0
     damper: 0
@@ -5611,7 +5621,7 @@ CharacterJoint:
   m_EnableProjection: 0
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
-  m_BreakForce: Infinity
+  m_BreakForce: 11000
   m_BreakTorque: Infinity
   m_EnableCollision: 0
   m_EnablePreprocessing: 0
@@ -5696,9 +5706,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _springJoint: {fileID: 1576717267}
   _interactionPoint: {fileID: 562078899}
-  _defaultSpring: 100
-  _defaultDamper: 50
-  _maxDistance: 0.5
+  _defaultSpring: 70
+  _defaultDamper: 5
+  _maxDistance: 0.1
+  _minDistance: 0
 --- !u!145 &1576717267
 SpringJoint:
   m_ObjectHideFlags: 0
@@ -5708,12 +5719,12 @@ SpringJoint:
   m_GameObject: {fileID: 1576717259}
   m_ConnectedBody: {fileID: 562078897}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: -1.35, y: -0.03, z: 0}
-  m_AutoConfigureConnectedAnchor: 1
+  m_Anchor: {x: -1.35, y: -0.03, z: -0.72}
+  m_AutoConfigureConnectedAnchor: 0
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   serializedVersion: 2
-  m_Spring: 10
-  m_Damper: 0.2
+  m_Spring: 70
+  m_Damper: 10
   m_MinDistance: 0
   m_MaxDistance: 0
   m_Tolerance: 0.025
@@ -5721,8 +5732,8 @@ SpringJoint:
   m_BreakTorque: Infinity
   m_EnableCollision: 0
   m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
+  m_MassScale: 10
+  m_ConnectedMassScale: 50
 --- !u!21 &1601669863
 Material:
   serializedVersion: 8
@@ -5926,12 +5937,12 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 2.8125
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 1
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!144 &1612877018
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -5948,16 +5959,16 @@ CharacterJoint:
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: -1}
   m_TwistLimitSpring:
-    spring: 2000
-    damper: 1000
+    spring: 100
+    damper: 10
   m_LowTwistLimit:
     limit: -10
     bounciness: 0
     contactDistance: 10
   m_HighTwistLimit:
-    limit: 10
+    limit: 100
     bounciness: 0
-    contactDistance: 7
+    contactDistance: 40
   m_SwingLimitSpring:
     spring: 0
     damper: 0
@@ -5972,7 +5983,7 @@ CharacterJoint:
   m_EnableProjection: 0
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
-  m_BreakForce: 3000
+  m_BreakForce: 13000
   m_BreakTorque: Infinity
   m_EnableCollision: 0
   m_EnablePreprocessing: 0
@@ -6057,9 +6068,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _springJoint: {fileID: 1612877023}
   _interactionPoint: {fileID: 562078899}
-  _defaultSpring: 100
-  _defaultDamper: 50
-  _maxDistance: 0.5
+  _defaultSpring: 70
+  _defaultDamper: 5
+  _maxDistance: 0.1
+  _minDistance: 0
 --- !u!145 &1612877023
 SpringJoint:
   m_ObjectHideFlags: 0
@@ -6069,12 +6081,12 @@ SpringJoint:
   m_GameObject: {fileID: 1612877015}
   m_ConnectedBody: {fileID: 562078897}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 1.2, y: 0.06, z: 0}
-  m_AutoConfigureConnectedAnchor: 1
+  m_Anchor: {x: 1.2, y: 0.06, z: -0.72}
+  m_AutoConfigureConnectedAnchor: 0
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   serializedVersion: 2
-  m_Spring: 10
-  m_Damper: 0.2
+  m_Spring: 70
+  m_Damper: 10
   m_MinDistance: 0
   m_MaxDistance: 0
   m_Tolerance: 0.025
@@ -6082,8 +6094,8 @@ SpringJoint:
   m_BreakTorque: Infinity
   m_EnableCollision: 0
   m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
+  m_MassScale: 10
+  m_ConnectedMassScale: 50
 --- !u!21 &1613212792
 Material:
   serializedVersion: 8
@@ -6218,8 +6230,8 @@ CharacterJoint:
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: -1}
   m_TwistLimitSpring:
-    spring: 7000
-    damper: 750
+    spring: 300
+    damper: 1
   m_LowTwistLimit:
     limit: -3
     bounciness: 0
@@ -6242,7 +6254,7 @@ CharacterJoint:
   m_EnableProjection: 0
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
-  m_BreakForce: 7000
+  m_BreakForce: 11000
   m_BreakTorque: Infinity
   m_EnableCollision: 0
   m_EnablePreprocessing: 0
@@ -6258,11 +6270,11 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 4
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 2
-  m_Constraints: 112
+  m_Interpolate: 1
+  m_Constraints: 0
   m_CollisionDetection: 1
 --- !u!136 &1640398577
 CapsuleCollider:
@@ -6375,9 +6387,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _springJoint: {fileID: 1640398583}
   _interactionPoint: {fileID: 562078899}
-  _defaultSpring: 100
-  _defaultDamper: 50
-  _maxDistance: 0.25
+  _defaultSpring: 70
+  _defaultDamper: 5
+  _maxDistance: 0.1
+  _minDistance: 0
 --- !u!145 &1640398583
 SpringJoint:
   m_ObjectHideFlags: 0
@@ -6387,12 +6400,12 @@ SpringJoint:
   m_GameObject: {fileID: 1640398573}
   m_ConnectedBody: {fileID: 562078897}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: -0.69, z: 0}
-  m_AutoConfigureConnectedAnchor: 1
+  m_Anchor: {x: 0, y: -0.41, z: -0.72}
+  m_AutoConfigureConnectedAnchor: 0
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   serializedVersion: 2
-  m_Spring: 10
-  m_Damper: 0.2
+  m_Spring: 70
+  m_Damper: 10
   m_MinDistance: 0
   m_MaxDistance: 0
   m_Tolerance: 0.025
@@ -6400,8 +6413,8 @@ SpringJoint:
   m_BreakTorque: Infinity
   m_EnableCollision: 0
   m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
+  m_MassScale: 10
+  m_ConnectedMassScale: 50
 --- !u!21 &1707737680
 Material:
   serializedVersion: 8
@@ -6788,12 +6801,12 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 4
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 1
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!144 &1785288080
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -6810,8 +6823,8 @@ CharacterJoint:
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: -1}
   m_TwistLimitSpring:
-    spring: 7000
-    damper: 3000
+    spring: 300
+    damper: 1
   m_LowTwistLimit:
     limit: 0
     bounciness: 0
@@ -6834,7 +6847,7 @@ CharacterJoint:
   m_EnableProjection: 0
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
-  m_BreakForce: 6000
+  m_BreakForce: 11000
   m_BreakTorque: Infinity
   m_EnableCollision: 0
   m_EnablePreprocessing: 0
@@ -6919,9 +6932,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _springJoint: {fileID: 1785288085}
   _interactionPoint: {fileID: 562078899}
-  _defaultSpring: 100
-  _defaultDamper: 50
-  _maxDistance: 0.5
+  _defaultSpring: 70
+  _defaultDamper: 5
+  _maxDistance: 0.1
+  _minDistance: 0
 --- !u!145 &1785288085
 SpringJoint:
   m_ObjectHideFlags: 0
@@ -6931,12 +6945,12 @@ SpringJoint:
   m_GameObject: {fileID: 1785288077}
   m_ConnectedBody: {fileID: 562078897}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: -1.34, z: 0}
-  m_AutoConfigureConnectedAnchor: 1
+  m_Anchor: {x: 0, y: -1.34, z: -0.72}
+  m_AutoConfigureConnectedAnchor: 0
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   serializedVersion: 2
-  m_Spring: 10
-  m_Damper: 0.2
+  m_Spring: 70
+  m_Damper: 10
   m_MinDistance: 0
   m_MaxDistance: 0
   m_Tolerance: 0.025
@@ -6944,8 +6958,8 @@ SpringJoint:
   m_BreakTorque: Infinity
   m_EnableCollision: 0
   m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
+  m_MassScale: 10
+  m_ConnectedMassScale: 50
 --- !u!1 &1811021857
 GameObject:
   m_ObjectHideFlags: 0
@@ -7085,7 +7099,7 @@ Transform:
   m_GameObject: {fileID: 1831325736}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -2.5, z: 0}
-  m_LocalScale: {x: 200, y: 5, z: 200}
+  m_LocalScale: {x: 250, y: 5, z: 200}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1351546680}
@@ -7281,12 +7295,12 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 5
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 1
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!144 &1854907245
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -7297,22 +7311,22 @@ CharacterJoint:
   m_ConnectedBody: {fileID: 1516905447}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0, z: 0}
-  m_Axis: {x: 1, y: -1, z: 0}
+  m_Axis: {x: 1, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0.7529531, y: -0.8107877, z: -0.02200973}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 0}
   m_TwistLimitSpring:
-    spring: 3000
-    damper: 700
+    spring: 10
+    damper: 1
   m_LowTwistLimit:
-    limit: -3
+    limit: -100
     bounciness: 0
-    contactDistance: 1
+    contactDistance: 80
   m_HighTwistLimit:
-    limit: 5
+    limit: 100
     bounciness: 0
-    contactDistance: 3
+    contactDistance: 80
   m_SwingLimitSpring:
     spring: 0
     damper: 0
@@ -7327,12 +7341,12 @@ CharacterJoint:
   m_EnableProjection: 0
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
-  m_BreakForce: 7000
+  m_BreakForce: 13000
   m_BreakTorque: Infinity
   m_EnableCollision: 0
   m_EnablePreprocessing: 0
   m_MassScale: 1
-  m_ConnectedMassScale: 1
+  m_ConnectedMassScale: 2
 --- !u!136 &1854907246
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -7412,9 +7426,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _springJoint: {fileID: 1854907250}
   _interactionPoint: {fileID: 562078899}
-  _defaultSpring: 100
-  _defaultDamper: 50
-  _maxDistance: 0.5
+  _defaultSpring: 70
+  _defaultDamper: 5
+  _maxDistance: 0.1
+  _minDistance: 0
 --- !u!145 &1854907250
 SpringJoint:
   m_ObjectHideFlags: 0
@@ -7424,12 +7439,12 @@ SpringJoint:
   m_GameObject: {fileID: 1854907242}
   m_ConnectedBody: {fileID: 562078897}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: -1.42, z: 0}
-  m_AutoConfigureConnectedAnchor: 1
+  m_Anchor: {x: 0, y: -1.42, z: -0.72}
+  m_AutoConfigureConnectedAnchor: 0
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   serializedVersion: 2
-  m_Spring: 10
-  m_Damper: 0.2
+  m_Spring: 70
+  m_Damper: 10
   m_MinDistance: 0
   m_MaxDistance: 0
   m_Tolerance: 0.025
@@ -7437,8 +7452,8 @@ SpringJoint:
   m_BreakTorque: Infinity
   m_EnableCollision: 0
   m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
+  m_MassScale: 10
+  m_ConnectedMassScale: 50
 --- !u!1 &1889982624
 GameObject:
   m_ObjectHideFlags: 0
@@ -7449,7 +7464,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1889982625}
   - component: {fileID: 1889982626}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: InitialAnchore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7736,23 +7751,23 @@ CharacterJoint:
   m_GameObject: {fileID: 2006022363}
   m_ConnectedBody: {fileID: 1516905447}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 2.53, z: -1.2}
-  m_Axis: {x: 0, y: 1, z: 0}
+  m_Anchor: {x: 0, y: 0, z: 0}
+  m_Axis: {x: 1, y: 1, z: 1}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 3.52, z: -1.23}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: -1}
   m_TwistLimitSpring:
-    spring: 7000
-    damper: 3000
+    spring: 10
+    damper: 1
   m_LowTwistLimit:
-    limit: -3
+    limit: -100
     bounciness: 1
-    contactDistance: 2
+    contactDistance: 20
   m_HighTwistLimit:
-    limit: 3
+    limit: 100
     bounciness: 1
-    contactDistance: 2
+    contactDistance: 20
   m_SwingLimitSpring:
     spring: 0
     damper: 0
@@ -7767,7 +7782,7 @@ CharacterJoint:
   m_EnableProjection: 0
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
-  m_BreakForce: 10000
+  m_BreakForce: 13000
   m_BreakTorque: Infinity
   m_EnableCollision: 0
   m_EnablePreprocessing: 0
@@ -7866,9 +7881,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _springJoint: {fileID: 2006022371}
   _interactionPoint: {fileID: 562078899}
-  _defaultSpring: 300
-  _defaultDamper: 150
-  _maxDistance: 0.75
+  _defaultSpring: 70
+  _defaultDamper: 10
+  _maxDistance: 0.1
+  _minDistance: 0
 --- !u!145 &2006022371
 SpringJoint:
   m_ObjectHideFlags: 0
@@ -7878,12 +7894,12 @@ SpringJoint:
   m_GameObject: {fileID: 2006022363}
   m_ConnectedBody: {fileID: 562078897}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 2.45, z: 0}
+  m_Anchor: {x: 0, y: 2.45, z: -1.9}
   m_AutoConfigureConnectedAnchor: 0
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   serializedVersion: 2
-  m_Spring: 10
-  m_Damper: 0.2
+  m_Spring: 70
+  m_Damper: 10
   m_MinDistance: 0
   m_MaxDistance: 1.5
   m_Tolerance: 0.025
@@ -7891,8 +7907,8 @@ SpringJoint:
   m_BreakTorque: Infinity
   m_EnableCollision: 0
   m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
+  m_MassScale: 10
+  m_ConnectedMassScale: 50
 --- !u!21 &2051956454
 Material:
   serializedVersion: 8
@@ -8027,8 +8043,8 @@ CharacterJoint:
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: -1}
   m_TwistLimitSpring:
-    spring: 7000
-    damper: 750
+    spring: 300
+    damper: 1
   m_LowTwistLimit:
     limit: -3
     bounciness: 0
@@ -8051,7 +8067,7 @@ CharacterJoint:
   m_EnableProjection: 0
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
-  m_BreakForce: 7000
+  m_BreakForce: 11000
   m_BreakTorque: Infinity
   m_EnableCollision: 0
   m_EnablePreprocessing: 0
@@ -8067,11 +8083,11 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 4
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 2
-  m_Constraints: 112
+  m_Interpolate: 1
+  m_Constraints: 0
   m_CollisionDetection: 1
 --- !u!136 &2067482557
 CapsuleCollider:
@@ -8184,9 +8200,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _springJoint: {fileID: 2067482563}
   _interactionPoint: {fileID: 562078899}
-  _defaultSpring: 100
-  _defaultDamper: 50
-  _maxDistance: 0.25
+  _defaultSpring: 70
+  _defaultDamper: 5
+  _maxDistance: 0.1
+  _minDistance: 0
 --- !u!145 &2067482563
 SpringJoint:
   m_ObjectHideFlags: 0
@@ -8196,12 +8213,12 @@ SpringJoint:
   m_GameObject: {fileID: 2067482553}
   m_ConnectedBody: {fileID: 562078897}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: -0.69, z: 0}
-  m_AutoConfigureConnectedAnchor: 1
+  m_Anchor: {x: 0, y: -0.41, z: -0.72}
+  m_AutoConfigureConnectedAnchor: 0
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   serializedVersion: 2
-  m_Spring: 10
-  m_Damper: 0.2
+  m_Spring: 70
+  m_Damper: 10
   m_MinDistance: 0
   m_MaxDistance: 0
   m_Tolerance: 0.025
@@ -8209,8 +8226,8 @@ SpringJoint:
   m_BreakTorque: Infinity
   m_EnableCollision: 0
   m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
+  m_MassScale: 10
+  m_ConnectedMassScale: 50
 --- !u!1 &2077077917
 GameObject:
   m_ObjectHideFlags: 0
@@ -8259,14 +8276,14 @@ CharacterJoint:
   m_ConnectedBody: {fileID: 1576717261}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0, z: 0}
-  m_Axis: {x: 1, y: -1, z: 0}
+  m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: -2.8322196, y: 0, z: -0.00000013411045}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
-    spring: 200
-    damper: 150
+    spring: 500
+    damper: 20
   m_LowTwistLimit:
     limit: -10
     bounciness: 0
@@ -8289,7 +8306,7 @@ CharacterJoint:
   m_EnableProjection: 0
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
-  m_BreakForce: Infinity
+  m_BreakForce: 11000
   m_BreakTorque: Infinity
   m_EnableCollision: 0
   m_EnablePreprocessing: 0
@@ -8305,12 +8322,12 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 1
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!136 &2077077921
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -8390,9 +8407,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _springJoint: {fileID: 2077077925}
   _interactionPoint: {fileID: 562078899}
-  _defaultSpring: 100
-  _defaultDamper: 50
-  _maxDistance: 0.25
+  _defaultSpring: 35
+  _defaultDamper: 10
+  _maxDistance: 0.1
+  _minDistance: 0
 --- !u!145 &2077077925
 SpringJoint:
   m_ObjectHideFlags: 0
@@ -8402,12 +8420,12 @@ SpringJoint:
   m_GameObject: {fileID: 2077077917}
   m_ConnectedBody: {fileID: 562078897}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: -0.69, y: -0.01, z: 0}
-  m_AutoConfigureConnectedAnchor: 1
+  m_Anchor: {x: -2.21, y: 0.03, z: -0.05}
+  m_AutoConfigureConnectedAnchor: 0
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   serializedVersion: 2
-  m_Spring: 10
-  m_Damper: 0.2
+  m_Spring: 70
+  m_Damper: 10
   m_MinDistance: 0
   m_MaxDistance: 0
   m_Tolerance: 0.025
@@ -8415,8 +8433,8 @@ SpringJoint:
   m_BreakTorque: Infinity
   m_EnableCollision: 0
   m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
+  m_MassScale: 10
+  m_ConnectedMassScale: 50
 --- !u!1 &2087653795
 GameObject:
   m_ObjectHideFlags: 0
@@ -8466,12 +8484,12 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 2.8125
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 1
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!144 &2087653798
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -8488,16 +8506,16 @@ CharacterJoint:
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: -1}
   m_TwistLimitSpring:
-    spring: 2000
-    damper: 1000
+    spring: 100
+    damper: 10
   m_LowTwistLimit:
     limit: -10
     bounciness: 0
     contactDistance: 10
   m_HighTwistLimit:
-    limit: 10
+    limit: 100
     bounciness: 0
-    contactDistance: 7
+    contactDistance: 40
   m_SwingLimitSpring:
     spring: 0
     damper: 0
@@ -8512,7 +8530,7 @@ CharacterJoint:
   m_EnableProjection: 0
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
-  m_BreakForce: 3000
+  m_BreakForce: 13000
   m_BreakTorque: Infinity
   m_EnableCollision: 0
   m_EnablePreprocessing: 0
@@ -8597,9 +8615,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _springJoint: {fileID: 2087653803}
   _interactionPoint: {fileID: 562078899}
-  _defaultSpring: 100
-  _defaultDamper: 50
+  _defaultSpring: 70
+  _defaultDamper: 5
   _maxDistance: 0.5
+  _minDistance: 0
 --- !u!145 &2087653803
 SpringJoint:
   m_ObjectHideFlags: 0
@@ -8609,12 +8628,12 @@ SpringJoint:
   m_GameObject: {fileID: 2087653795}
   m_ConnectedBody: {fileID: 562078897}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: -1.2, y: 0.06, z: 0}
-  m_AutoConfigureConnectedAnchor: 1
+  m_Anchor: {x: -1.2, y: 0.06, z: -0.72}
+  m_AutoConfigureConnectedAnchor: 0
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   serializedVersion: 2
-  m_Spring: 10
-  m_Damper: 0.2
+  m_Spring: 70
+  m_Damper: 10
   m_MinDistance: 0
   m_MaxDistance: 0
   m_Tolerance: 0.025
@@ -8622,8 +8641,8 @@ SpringJoint:
   m_BreakTorque: Infinity
   m_EnableCollision: 0
   m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
+  m_MassScale: 10
+  m_ConnectedMassScale: 50
 --- !u!21 &2092048118
 Material:
   serializedVersion: 8
@@ -9015,7 +9034,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 477a2fc097dc4f9ab63af34ad1b2bb40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _jointToCheck: {fileID: 1339405915}
+  _jointToCheck: []
 --- !u!114 &919132147851622107
 MonoBehaviour:
   m_ObjectHideFlags: 0

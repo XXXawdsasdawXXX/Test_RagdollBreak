@@ -5,7 +5,7 @@ namespace Code.Character
 {
     public class RagDollStateChecker : MonoBehaviour
     {
-        [SerializeField] private CharacterJoint _jointToCheck;
+        [SerializeField] private CharacterJoint[] _jointToCheck;
 
         private bool _isBroken;
         public event Action OnBroken;
@@ -16,12 +16,20 @@ namespace Code.Character
             {
                 return;
             }
-            
-            if (_jointToCheck == null ||  _jointToCheck.connectedBody == null)
+
+            for (int i = 0; i < _jointToCheck.Length; i++)
             {
-                _isBroken = true;
-                OnBroken?.Invoke();
+                if (IsBroken(_jointToCheck[i]))
+                {
+                    _isBroken = true;
+                    OnBroken?.Invoke();
+                }
             }
+        }
+
+        private bool IsBroken(CharacterJoint joint)
+        {
+            return joint == null || joint.connectedBody == null;
         }
     }
 }

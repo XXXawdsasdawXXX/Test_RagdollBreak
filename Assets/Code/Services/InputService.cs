@@ -8,6 +8,7 @@ namespace Code.Services
         public event Action<Vector3> OnStartTouch;
         public event Action<Vector3> OnTouch;
         public event Action<Vector3> OnEndTouch;
+        public Vector3 MousePosition { get; private set; }
 
         private void Update()
         {
@@ -18,6 +19,7 @@ namespace Code.Services
             
             if (Input.GetMouseButton(0))
             {
+                MousePosition = Input.mousePosition;
                 OnTouch?.Invoke(Input.mousePosition);
             }
 

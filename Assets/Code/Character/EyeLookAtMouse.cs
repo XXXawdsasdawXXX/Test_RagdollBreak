@@ -1,10 +1,12 @@
 ﻿using System;
+using Code.Services;
 using UnityEngine;
 
 namespace Code.Character
 {
     public class EyeLookAtMouse: MonoBehaviour
     {
+        [SerializeField] private InputService _inputService;
         [SerializeField] private  Transform _leftEye; 
         [SerializeField] private  Transform _rightEye;
         [SerializeField] private float _distance = 40.0f;
@@ -18,7 +20,12 @@ namespace Code.Character
 
         private void Update()
         {
-            Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+            if (_inputService.MousePosition == Vector3.zero)
+            {
+                return;
+            }
+            
+            Ray ray = _mainCamera.ScreenPointToRay(_inputService.MousePosition);
             Vector3 targetPosition = ray.GetPoint(_distance);
 
             LookAtPoint(_leftEye, targetPosition);
