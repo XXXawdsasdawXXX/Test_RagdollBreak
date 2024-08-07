@@ -715,6 +715,8 @@ MonoBehaviour:
   _leftEye: {fileID: 1132419752}
   _rightEye: {fileID: 1931867979}
   _distance: 40
+  _maxVerticalAngle: 70
+  _maxHorizontalAngle: 70
 --- !u!1 &312756672
 GameObject:
   m_ObjectHideFlags: 0
@@ -4234,7 +4236,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1132419751}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.46111843, y: 1.7301435, z: -0.72539794}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

@@ -18,8 +18,7 @@ namespace Code.Interaction
         
         public bool IsUsed { get; private set; }
         public event Action<InteractionJoint> OnStartUse; 
-        public event Action OnStopUse; 
-
+        public event Action OnStopUse;
 
         private void Awake()
         {
@@ -57,21 +56,15 @@ namespace Code.Interaction
         private void StartMove(Vector3 mousePosition)
         {
             Ray ray = _camera.ScreenPointToRay(mousePosition);
-            RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out var hit))
             {
                 if (hit.transform.TryGetComponent(out _currentJoint))
                 {
                     IsUsed = true;
                     _rigidbody.isKinematic = true;
-                   //_currentJoint.SetConnectedAnchor(hit.transform.InverseTransformPoint(hit.point));
                     _currentJoint.SetEnable(true);
                     OnStartUse?.Invoke(_currentJoint);
-                }
-                else
-                {
-                    Debug.Log("Raycast did not hit the interaction object.");
                 }
             }
         }
@@ -101,8 +94,6 @@ namespace Code.Interaction
             
             _currentJoint.SetEnable(false);
             _currentJoint = null;
-            
-            //transform.position = _interactionObject.position;
         }
     }
 }
