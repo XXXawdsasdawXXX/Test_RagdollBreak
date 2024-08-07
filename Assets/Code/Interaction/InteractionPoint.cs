@@ -14,9 +14,10 @@ namespace Code.Interaction
         [SerializeField] private Transform _interactionObject;
 
         private Camera _camera;
-
+        private InteractionJoint _currentJoint;
+        
         public bool IsUsed { get; private set; }
-        public event Action OnStartUse; 
+        public event Action<InteractionJoint> OnStartUse; 
         public event Action OnStopUse; 
 
 
@@ -55,18 +56,18 @@ namespace Code.Interaction
 
         private void StartMove(Vector3 mousePosition)
         {
-            // Преобразуем позицию мыши в мировые координаты
             Ray ray = _camera.ScreenPointToRay(mousePosition);
             RaycastHit hit;
 
-            // Проверяем, попадает ли луч в _interactionObject
             if (Physics.Raycast(ray, out hit))
             {
-                if (hit.transform == _interactionObject)
+                if (hit.transform.TryGetComponent(out _currentJoint))
                 {
                     IsUsed = true;
                     _rigidbody.isKinematic = true;
-                    OnStartUse?.Invoke();
+                   //_currentJoint.SetConnectedAnchor(hit.transform.InverseTransformPoint(hit.point));
+                    _currentJoint.SetEnable(true);
+                    OnStartUse?.Invoke(_currentJoint);
                 }
                 else
                 {
@@ -92,10 +93,16 @@ namespace Code.Interaction
             {
                 return;
             }
+           
             IsUsed = false;
             _rigidbody.isKinematic = false;
-            transform.position = _interactionObject.position;
+            
             OnStopUse?.Invoke();
+            
+            _currentJoint.SetEnable(false);
+            _currentJoint = null;
+            
+            //transform.position = _interactionObject.position;
         }
     }
 }
