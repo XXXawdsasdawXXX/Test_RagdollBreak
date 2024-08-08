@@ -4,38 +4,14 @@ namespace Code.Character
 {
     public class RagDollController : MonoBehaviour
     {
-        [SerializeField] private RagDollStateChecker _stateChecker;
         [SerializeField] private Rigidbody[] _bodies;
         [SerializeField] private Collider[] _ragDollColliders;
     
         [SerializeField] private bool _isActive;
-    
+
         private void OnEnable()
         {
             SetEnable(_isActive);
-            SubscribeToEvents(true);
-        }
-        
-        private void OnDisable()
-        {
-            SubscribeToEvents(false);
-        }
-
-        private void SubscribeToEvents(bool flag)
-        {
-            if (flag)
-            {
-                _stateChecker.OnBroken += OnBroken;
-            }
-            else
-            {
-                _stateChecker.OnBroken -= OnBroken;
-
-            }
-        }
-
-        private void OnBroken()
-        {
         }
 
         public void SetEnable(bool enable)

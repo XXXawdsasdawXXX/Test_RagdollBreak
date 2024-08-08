@@ -14,10 +14,6 @@ namespace Code.Interaction
         [SerializeField,Range(0,5)] private float _maxDistance = 2;
         [SerializeField,Range(0,5)] private float _minDistance = 2;
 
-        /*private float _massScale = 10;
-        private float _connectionMassScale = 50;*/
-        
-
         public event Action OnStartInteraction;
         public event Action OnStopInteraction;
         

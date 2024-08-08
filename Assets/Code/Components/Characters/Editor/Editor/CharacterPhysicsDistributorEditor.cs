@@ -17,17 +17,23 @@ namespace Code.Character.Editor
                 distributor.DistributeMass();
             }
             
+            if (GUILayout.Button("Character Joint: multiply brask force"))
+            {
+                distributor.MultiplyBreakForce();
+            }
             
             if (GUILayout.Button("Load"))
             {
                 distributor.LoadData();
             }
-            
-                
+
             if (GUILayout.Button("Set"))
             {
                 distributor.SetData();
             }
+            
+            
+            
         }
     }
 }

@@ -18,12 +18,12 @@ namespace Code.Character
                 Name = name;
                 Body = body;
 
-                if (body.TryGetComponent(out CharacterJoint characterJoint))
+                if (body.TryGetComponent(out CharacterJoint characterJoint) && characterJoint != null)
                 {
                     CharacterJointData = new Character(characterJoint);
                 }
 
-                if (body.TryGetComponent(out SpringJoint springJoint))
+                if (body.TryGetComponent(out SpringJoint springJoint) && springJoint != null)
                 {
                     SprintJointData = new Spring(springJoint);
                 }
@@ -81,6 +81,7 @@ namespace Code.Character
         }
 
         [SerializeField] private float _totalMass = 70f;
+        [SerializeField] private float _brakeMultiplier = 1f;
         [SerializeField] private Rigidbody[] _rigidbodies;
         [SerializeField] private List<Data> _data;
 
@@ -130,6 +131,19 @@ namespace Code.Character
             return 0f;
         }
 
+        public void MultiplyBreakForce()
+        {
+            foreach (var data in _data)
+            {
+                var cData = data.CharacterJointData;
+                var cJoint = data.CharacterJointData.Joint;
+                if (cData != null && cJoint != null)
+                {
+                    cData.BreakForce *= _brakeMultiplier;
+                }
+            }
+        }
+
         public void LoadData()
         {
             _data.Clear();
@@ -141,14 +155,14 @@ namespace Code.Character
 
         public void SetData()
         {
-            _data.Clear();
             foreach (var data in _data)
             {
-                if (data.CharacterJointData != null)
+                var cData = data.CharacterJointData;
+                var cJoint = data.CharacterJointData.Joint;
+                if (cData != null && cJoint != null)
                 {
-                    var cData = data.CharacterJointData;
-                    var cJoint = data.CharacterJointData.Joint;
 
+                    Debug.Log($"{data.Name} {cJoint != null} {cData != null}");
                     cJoint.breakForce = cData.BreakForce;
                     cJoint.axis = cData.Axis;
                     cJoint.twistLimitSpring = new SoftJointLimitSpring()
