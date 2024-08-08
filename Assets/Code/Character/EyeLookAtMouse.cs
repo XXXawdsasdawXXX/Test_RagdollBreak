@@ -58,7 +58,7 @@ namespace Code.Character
                     break;
             }
 
-            return Mathf.Clamp(-angle, _maxAngle, _maxAngle);
+            return Mathf.Clamp(-angle, -_maxAngle, _maxAngle);
         }
     }
 }

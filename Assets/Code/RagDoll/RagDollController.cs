@@ -6,7 +6,6 @@ namespace Code.Character
     {
         [SerializeField] private RagDollStateChecker _stateChecker;
         [SerializeField] private Rigidbody[] _bodies;
-        [SerializeField] private Rigidbody[] _footBodies;
         [SerializeField] private Collider[] _ragDollColliders;
     
         [SerializeField] private bool _isActive;
@@ -37,10 +36,6 @@ namespace Code.Character
 
         private void OnBroken()
         {
-            foreach (var footBody in _footBodies)
-            {
-                footBody.isKinematic = false;
-            }
         }
 
         public void SetEnable(bool enable)
@@ -53,11 +48,7 @@ namespace Code.Character
             {
                 col.enabled = enable;
             }
-
-            foreach (var footBody in _footBodies)
-            {
-                footBody.isKinematic = true;
-            }
+            
             _isActive = enable;
         }
 

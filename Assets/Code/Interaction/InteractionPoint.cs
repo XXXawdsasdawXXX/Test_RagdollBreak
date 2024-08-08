@@ -77,6 +77,7 @@ namespace Code.Interaction
             }
             mousePosition.z = _camera.WorldToScreenPoint(transform.position).z;
             var target = _camera.ScreenToWorldPoint(mousePosition);
+            target.z = 0;
             transform.position = target;
         }
 

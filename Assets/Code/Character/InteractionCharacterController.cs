@@ -8,7 +8,6 @@ namespace Code.Character
     {
         [SerializeField] private RagDollController _ragDollController;
         [SerializeField] private InteractionJoint[] _interactionJoints;
-        [SerializeField] private RagDollFootController[] _foots;
 
         private void OnEnable()
         {
@@ -42,18 +41,12 @@ namespace Code.Character
 
         private void OnStopInteraction()
         {
-            foreach (var foot in _foots)
-            {
-                foot.SetEnable(true);
-            }
+       
         }
 
         private void OnStartInteraction()
         {
-            foreach (var foot in _foots)
-            {
-                foot.SetEnable(false);
-            }
+       
         }
 
 
@@ -65,10 +58,6 @@ namespace Code.Character
             _interactionJoints = GetComponentsInChildren<InteractionJoint>();
         }
         
-        public void FindFoots()
-        {
-            _foots = GetComponentsInChildren<RagDollFootController>();
-        }
 #endif
         #endregion
     }

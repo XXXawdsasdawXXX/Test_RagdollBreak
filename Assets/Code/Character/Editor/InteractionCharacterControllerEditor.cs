@@ -15,11 +15,6 @@ namespace Code.Character.Editor
             {
                 controller.FindInteractionJoints();
             }
-            
-            if (GUILayout.Button("Find foots"))
-            {
-                controller.FindFoots();
-            }
         }
     }
 }
