@@ -6,6 +6,7 @@ namespace Code.Character
 {
     public class CharacterPhysicsDistributor : MonoBehaviour
     {
+        [SerializeField] private float _massMultiplier;
         [Serializable]
         public class Data
         {
@@ -85,6 +86,14 @@ namespace Code.Character
         [SerializeField] private Rigidbody[] _rigidbodies;
         [SerializeField] private List<Data> _data;
 
+        public void MultiplyMass()
+        {
+
+            foreach (var body in _rigidbodies)
+            {
+                body.mass += _massMultiplier;
+            }
+        }
         public void DistributeMass()
         {
             float totalVolume = 0f;
@@ -98,6 +107,8 @@ namespace Code.Character
                 float volume = GetVolume(rb);
                 rb.mass = _totalMass * (volume / totalVolume);
             }
+            
+            Debug.Log($"Set total mass {_totalMass}");
         }
 
         private float GetVolume(Rigidbody rb)
@@ -140,8 +151,10 @@ namespace Code.Character
                 if (cData != null && cJoint != null)
                 {
                     cData.BreakForce *= _brakeMultiplier;
+                    
                 }
             }
+            Debug.Log($"MultiplyBreakForce {_brakeMultiplier}");
         }
 
         public void LoadData()

@@ -12,10 +12,17 @@ namespace Code.Character.Editor
             
             CharacterPhysicsDistributor distributor = (CharacterPhysicsDistributor)target;
 
-            if (GUILayout.Button("Distribute Mass"))
+            if (GUILayout.Button("Rigidbody: Distribute Mass"))
             {
                 distributor.DistributeMass();
             }
+            
+            
+            if (GUILayout.Button("Rigidbody: Multiply  Mass"))
+            {
+                distributor.MultiplyMass();
+            }
+
             
             if (GUILayout.Button("Character Joint: multiply brask force"))
             {

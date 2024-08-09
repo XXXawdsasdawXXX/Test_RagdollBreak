@@ -14,6 +14,7 @@ namespace Code.Interaction
         [SerializeField,Range(0,5)] private float _maxDistance = 2;
         [SerializeField,Range(0,5)] private float _minDistance = 2;
 
+        public bool IsUse { get; private set; }
         public event Action OnStartInteraction;
         public event Action OnStopInteraction;
         
@@ -31,6 +32,7 @@ namespace Code.Interaction
             _springJoint.damper = enable ? _defaultDamper : 0;
             var action = enable ? OnStartInteraction : OnStopInteraction;
             action?.Invoke();
+            IsUse = enable;
         }
         
         public Vector3 GetAnchor()
